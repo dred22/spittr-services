@@ -1,0 +1,36 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      format_sql: true
+  profiles:
+    active:
+      - inmemory
+---
+spring:
+  jpa:
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    - hibernate
+  datasource:
+    url: jdbc:postgresql://localhost:5433/handbook
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+---
+spring:
+  h2:
+    console:
+      path: /h2
+      enabled: true
+  jpa:
+    dialect: org.hibernate.dialect.H2Dialect
+  profiles:
+    - inmemory
+  datasource:
+    url: jdbc:h2:file:~/handbook
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
