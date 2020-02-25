@@ -1,14 +1,12 @@
 package spittr.dbproxy.controller;
 
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spittr.data.ReferenceDao;
 import spittr.dbproxy.assembler.ReferenceResourceAssembler;
 import spittr.domain.dto.ReferenceResource;
@@ -33,9 +31,14 @@ public class DataReferenceController {
     }
 
     @GetMapping
-    public Resources<ReferenceResource> getReferences() {
-
-        List<ReferenceEntity> entitiesList = StreamSupport.stream(referenceDao.findAll().spliterator(), false)
+    public Resources<ReferenceResource> getReferences(@RequestParam("page") Optional<Integer> pageNumber) {
+        PageRequest page;
+        if (pageNumber.isPresent()) {
+            page = PageRequest.of(pageNumber.get(), 5);
+        } else {
+            page = PageRequest.of(0, 5);
+        }
+        List<ReferenceEntity> entitiesList = StreamSupport.stream(referenceDao.findAll(page).spliterator(), false)
                 .collect(Collectors.toList());
 
         List<ReferenceResource> referenceResources = referenceResourceAssembler.toResources(entitiesList);
