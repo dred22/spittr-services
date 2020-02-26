@@ -23,17 +23,39 @@
 	</properties>
 
 	<dependencies>
-		<!-- Cloud dependencies -->
-
+		<!-- Spittr dependencies -->
+		<!--		<dependency>
+                    <groupId>spittr</groupId>
+                    <artifactId>spittr-data</artifactId>
+                    <version>${spittr.version}</version>
+                </dependency>-->
 
 		<!-- Necessary Boot starters -->
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!-- Misc -->
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Test dependencies -->
 
 
 	</dependencies>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

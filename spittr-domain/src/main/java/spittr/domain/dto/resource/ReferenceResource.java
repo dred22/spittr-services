@@ -1,4 +1,4 @@
-package spittr.domain.dto;
+package spittr.domain.dto.resource;
 
 
 import lombok.Getter;

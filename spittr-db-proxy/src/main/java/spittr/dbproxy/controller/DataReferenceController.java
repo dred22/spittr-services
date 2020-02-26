@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spittr.data.ReferenceDao;
 import spittr.dbproxy.assembler.ReferenceResourceAssembler;
-import spittr.domain.dto.ReferenceResource;
+import spittr.domain.dto.resource.ReferenceResource;
 import spittr.domain.model.ReferenceEntity;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class DataReferenceController {
         Resources<ReferenceResource> resources =
                 new Resources<>(referenceResources);
 
-        resources.add(ControllerLinkBuilder.linkTo(DataReferenceController.class).withRel("recents"));
+        resources.add(ControllerLinkBuilder.linkTo(DataReferenceController.class).withSelfRel());
         return resources;
     }
 
