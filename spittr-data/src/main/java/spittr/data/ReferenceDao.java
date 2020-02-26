@@ -6,5 +6,5 @@ import spittr.domain.model.ReferenceEntity;
 
 public interface ReferenceDao
         extends PagingAndSortingRepository<ReferenceEntity, Long> {
-    ReferenceEntity findOneByUserName(String userName);
+
 }
