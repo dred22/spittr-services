@@ -8,7 +8,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import spittr.web.dto.Reference;
+import spittr.domain.model.Reference;
 import spittr.web.exeption.ReferenceNotFoundException;
 import spittr.web.service.ReferenceService;
 

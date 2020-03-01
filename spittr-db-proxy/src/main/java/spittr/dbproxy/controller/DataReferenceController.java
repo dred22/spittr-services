@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spittr.data.ReferenceDao;
 import spittr.dbproxy.assembler.ReferenceResourceAssembler;
-import spittr.domain.dto.resource.ReferenceResource;
-import spittr.domain.model.ReferenceEntity;
+import spittr.dbproxy.hateos.resource.ReferenceResource;
+import spittr.data.model.ReferenceEntity;
 
 import java.util.List;
 import java.util.Optional;

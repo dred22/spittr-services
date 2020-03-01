@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("spittr.data")
-@EntityScan("spittr.domain.model")
+@EntityScan("spittr.data.model")
 public class DbProxyApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

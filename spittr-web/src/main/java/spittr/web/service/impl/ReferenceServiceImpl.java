@@ -1,7 +1,7 @@
 package spittr.web.service.impl;
 
 import org.springframework.stereotype.Service;
-import spittr.web.dto.Reference;
+import spittr.domain.model.Reference;
 import spittr.web.service.ReferenceService;
 
 import java.util.List;

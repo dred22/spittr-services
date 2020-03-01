@@ -1,6 +1,6 @@
 package spittr.web.service;
 
-import spittr.web.dto.Reference;
+import spittr.domain.model.Reference;
 
 import java.util.List;
 

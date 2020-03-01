@@ -1,4 +1,4 @@
-package spittr.domain.model;
+package spittr.data.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

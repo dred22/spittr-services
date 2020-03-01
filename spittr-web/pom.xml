@@ -24,11 +24,11 @@
 
 	<dependencies>
 		<!-- Spittr dependencies -->
-		<!--		<dependency>
-                    <groupId>spittr</groupId>
-                    <artifactId>spittr-data</artifactId>
-                    <version>${spittr.version}</version>
-                </dependency>-->
+		<dependency>
+			<groupId>spittr</groupId>
+			<artifactId>spittr-domain</artifactId>
+			<version>${spittr.version}</version>
+		</dependency>
 
 		<!-- Necessary Boot starters -->
 		<dependency>

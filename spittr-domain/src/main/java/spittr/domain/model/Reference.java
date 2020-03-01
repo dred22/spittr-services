@@ -1,4 +1,4 @@
-package spittr.web.dto;
+package spittr.domain.model;
 
 
 import lombok.Data;

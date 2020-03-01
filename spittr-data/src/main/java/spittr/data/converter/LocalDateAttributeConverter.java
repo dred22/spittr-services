@@ -1,4 +1,4 @@
-package spittr.domain.converter;
+package spittr.data.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

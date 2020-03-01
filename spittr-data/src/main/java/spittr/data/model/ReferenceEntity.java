@@ -1,8 +1,8 @@
-package spittr.domain.model;
+package spittr.data.model;
 
 
 import lombok.Data;
-import spittr.domain.converter.LocalDateAttributeConverter;
+import spittr.data.converter.LocalDateAttributeConverter;
 
 
 import javax.persistence.*;

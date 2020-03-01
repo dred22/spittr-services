@@ -1,10 +1,10 @@
-package spittr.domain.dto.resource;
+package spittr.dbproxy.hateos.resource;
 
 
 import lombok.Getter;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
-import spittr.domain.model.ReferenceEntity;
+import spittr.data.model.ReferenceEntity;
 
 import java.time.LocalDate;
 

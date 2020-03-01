@@ -3,8 +3,8 @@ package spittr.dbproxy.assembler;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 import spittr.dbproxy.controller.DataReferenceController;
-import spittr.domain.dto.resource.ReferenceResource;
-import spittr.domain.model.ReferenceEntity;
+import spittr.dbproxy.hateos.resource.ReferenceResource;
+import spittr.data.model.ReferenceEntity;
 
 @Component
 public class ReferenceResourceAssembler extends ResourceAssemblerSupport<ReferenceEntity, ReferenceResource> {
