@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th::insert="head :: copy"></head>
+
+<body>
+<div class=" navbar-fixed-top ">
+    <div class="container">
+        <div class="pull-right">
+            <a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en" class="lang-lg" lang="en"></a>
+            <a href="${requestScope['javax.servlet.forward.request_uri']}?lang=fr" class="lang-lg" lang="fr"></a>
+        </div>
+    </div>
+</div>
+<div id="wrapper">
+
+
+    <!--     <div id="wrapper"> -->
+    <%@ include file="components/side-bar.jsp" %>
+
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>My CRUD web site</h1>
+                    <p>profile is ${profiles[0]}</p>
+                    <p>
+                        <spring:message code="reference.welcome"/>
+                    </p>
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<div th::insert="" components
+/script-block :: copy></div>
+<div th::insert="" components
+/foot :: copy></div>
+<body>
