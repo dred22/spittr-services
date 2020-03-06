@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
-<head th::insert="head :: copy"></head>
+<head th:replace="component/head :: copy"></head>
 
 <body>
 <div class=" navbar-fixed-top ">
@@ -14,11 +13,8 @@
     </div>
 </div>
 <div id="wrapper">
-
-
     <!--     <div id="wrapper"> -->
-    <%@ include file="components/side-bar.jsp" %>
-
+    <div th:replace="component/side-bar :: #sidebar-wrapper"></div>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -27,20 +23,15 @@
                 <div class="col-lg-12">
                     <h1>My CRUD web site</h1>
                     <p>profile is ${profiles[0]}</p>
-                    <p>
-                        <spring:message code="reference.welcome"/>
-                    </p>
+                    <p th:text="#{reference.welcome}">BUG</p>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-
 </div>
 <!-- /#wrapper -->
-<div th::insert="" components
-/script-block :: copy></div>
-<div th::insert="" components
-/foot :: copy></div>
-<body>
+<div th:replace="component/script-block :: #scripts-template"></div>
+</body>
+</html>

@@ -1,7 +1,17 @@
-<%@ include file="components/head.jsp"%>
-<%@ include file="components/side-bar.jsp"%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="component/head :: copy"></head>
 
-
+<body>
+<div class=" navbar-fixed-top ">
+	<div class="container">
+		<div class="pull-right">
+			<a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en" class="lang-lg" lang="en"></a>
+			<a href="${requestScope['javax.servlet.forward.request_uri']}?lang=fr" class="lang-lg" lang="fr"></a>
+		</div>
+	</div>
+</div>
 	<!-- Page Content -->
 	<div id="page-content-wrapper">
 		<div class="container">
@@ -47,6 +57,6 @@
 
 </div>
 <!-- /#wrapper -->
-
-<%@ include file="components/script-block.jsp"%>
-<%@ include file="components/foot.jsp"%>
+<div th:replace="component/script-block :: #scripts-template"></div>
+</body>
+</html>
