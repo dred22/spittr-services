@@ -36,4 +36,5 @@ public class WebConfig implements WebMvcConfigurer {
     public AuthenticationTrustResolver getAuthenticationTrustResolver() {
         return new AuthenticationTrustResolverImpl();
     }
+
 }

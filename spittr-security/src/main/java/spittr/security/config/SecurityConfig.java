@@ -40,7 +40,7 @@ public class SecurityConfig
     protected void configure(HttpSecurity http)
             throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/references", "/h2/**").permitAll().anyRequest().authenticated()
+                .antMatchers("/", "/reference/references", "/h2/**").permitAll().anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login").permitAll().and().logout()
                 .logoutSuccessUrl("/")

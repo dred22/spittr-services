@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <body>
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
@@ -7,18 +8,9 @@
         <li class="sidebar-brand"><a href="${pageContext.request.contextPath}/"> CRUD </a></li>
         <li><a th:href="@{/reference/register}" th:text="#{side-bar.create}"></a></li>
         <li><a th:href="@{/reference/references}" th:text="#{side-bar.show_all}"></a></li>
-        <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}" th:text="#{authentication.logout}" ></a></li>
-        <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}" th:text="#{authentication.login}" ></a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{authentication.logout}" ></a></li>
+        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" th:text="#{authentication.login}" ></a></li>
 
-        <!--<security:authorize access="isAuthenticated()" var="isAuthenticated"/>-->
-        <!--        <c:choose>
-                    <c:when test="${isAuthenticated}">
-                        <li><a href="${pageContext.request.contextPath}/logout" th:text="#{authentication.logout}"></a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="${pageContext.request.contextPath}/login" th:text="#{authentication.login}"></a></li>
-                    </c:otherwise>
-                </c:choose>-->
         <!-- 		<li><a href="#">Events</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Services</a></li>

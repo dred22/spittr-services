@@ -4,3 +4,10 @@ server:
 logging:
   level:
     spittr: DEBUG
+spring:
+  application.name: Bootstrap Spring Boot
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head th:replace="component/head :: copy"></head>
 
 <body>
@@ -23,7 +24,7 @@
                 <div class="col-lg-12">
                     <h1>My CRUD web site</h1>
                     <p>Logged user: <span sec:authentication="name">Hasn't logged in</span></p>
-                    <p>Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span></p>
+                    <p sec:authorize="isAuthenticated()">Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span></p>
                     <p th:text="#{reference.welcome}">BUG</p>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                 </div>

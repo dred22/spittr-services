@@ -20,10 +20,10 @@
 
 			<div class="col-sm-offset-3 col-sm-6">
 					<!--ERRORS BLOCK-->
-                  <p th:if="${error}">
+                  <p th:if="${param.error}">
                     <font color="red">
                       Incorrect credentials <br/>
-						<span th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+						<span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
                     </font>
                   </p>
 

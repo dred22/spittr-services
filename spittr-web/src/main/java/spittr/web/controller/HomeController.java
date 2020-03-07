@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
 @Controller
@@ -48,14 +50,14 @@ public class HomeController {
         }
     }
 
-/*    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    @GetMapping(value="/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
             SecurityContextHolder.getContext().setAuthentication(null);
         }
         return "redirect:/";
-    }*/
+    }
 
     /**
      * This method returns true if users is already authenticated [logged-in], else false.
