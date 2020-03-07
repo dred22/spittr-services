@@ -24,12 +24,24 @@
 
 	<dependencies>
 		<!-- Cloud dependencies -->
-
-
+		<dependency>
+			<groupId>spittr</groupId>
+			<artifactId>spittr-domain</artifactId>
+			<version>${spittr.version}</version>
+		</dependency>
 		<!-- Necessary Boot starters -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 
 		<!-- Misc -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 
 		<!-- Test dependencies -->

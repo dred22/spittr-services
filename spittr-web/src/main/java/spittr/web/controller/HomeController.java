@@ -5,6 +5,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +24,8 @@ public class HomeController {
     @Autowired
     private Environment environment;
 
-/*    @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;*/
+    @Autowired
+    AuthenticationTrustResolver authenticationTrustResolver;
 
     @GetMapping
     public String home(Locale locale, Model model) {
@@ -58,9 +61,8 @@ public class HomeController {
      * This method returns true if users is already authenticated [logged-in], else false.
      */
     private boolean isCurrentAuthenticationAnonymous() {
-/*        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authenticationTrustResolver.isAnonymous(authentication);*/
-        return false;
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationTrustResolver.isAnonymous(authentication);
     }
 
 }

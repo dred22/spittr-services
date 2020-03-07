@@ -26,7 +26,7 @@
 		<!-- Spittr dependencies -->
 		<dependency>
 			<groupId>spittr</groupId>
-			<artifactId>spittr-domain</artifactId>
+			<artifactId>spittr-security</artifactId>
 			<version>${spittr.version}</version>
 		</dependency>
 

@@ -1,7 +1,7 @@
-<div id="scripts-template">
-    <script src="${pageContext.request.contextPath}/public/js/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/public/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/public/js/script.js"></script>
+<div id="scripts-template" xmlns:th="http://www.w3.org/1999/xhtml">
+    <script th:src="@{/public/js/jquery.js}"></script>
+    <script th:src="@{/public/js/bootstrap.min.js}"></script>
+    <script th:src="@{/public/js/script.js}"></script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
