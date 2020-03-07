@@ -5,14 +5,7 @@
 <head th:replace="component/head :: copy"></head>
 
 <body>
-<div class=" navbar-fixed-top ">
-    <div class="container">
-        <div class="pull-right">
-            <a href="${requestScope['javax.servlet.forward.request_uri']}?lang=en" class="lang-lg" lang="en"></a>
-            <a href="${requestScope['javax.servlet.forward.request_uri']}?lang=fr" class="lang-lg" lang="fr"></a>
-        </div>
-    </div>
-</div>
+<div th:replace="component/lang-bar :: copy"></div>
 <div id="wrapper">
     <!--     <div id="wrapper"> -->
     <div th:replace="component/side-bar :: #sidebar-wrapper"></div>

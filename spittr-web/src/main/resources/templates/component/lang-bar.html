@@ -1,0 +1,8 @@
+<div class="navbar-fixed-top" th:fragment="copy" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <div class="pull-right">
+            <a th:href="@{__${#httpServletRequest.requestURI}__?lang=en}" class="lang-lg" lang="en"></a>
+            <a th:href="@{__${#httpServletRequest.requestURI}__?lang=fr}" class="lang-lg" lang="fr"></a>
+        </div>
+    </div>
+</div>
