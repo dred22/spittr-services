@@ -11,3 +11,5 @@ spring:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html
+spittr:
+  db-proxy-url: http://127.0.0.1:8080/data

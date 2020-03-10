@@ -1,6 +1,7 @@
 package spittr.dbproxy.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/data/users")
 public class DataUserController {
@@ -31,6 +33,7 @@ public class DataUserController {
         } else {
             page = PageRequest.of(0, 5);
         }
+        log.info("Getting users, page=[{}]", page);
         List<UserEntity> entitiesList = StreamSupport.stream(userDao.findAll(page).spliterator(), false)
                 .collect(Collectors.toList());
 

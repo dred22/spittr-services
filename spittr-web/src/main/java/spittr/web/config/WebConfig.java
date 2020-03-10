@@ -1,25 +1,39 @@
 package spittr.web.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import spittr.security.config.SecurityConfig;
 
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 @Configuration
 @Import(SecurityConfig.class)
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${spittr.db-proxy-url}")
+    private String dbProxyUrl;
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public Traverson traverson() {
+        Traverson traverson = new Traverson(
+                URI.create(dbProxyUrl), MediaTypes.HAL_JSON);
+        return traverson;
     }
 
     @Bean

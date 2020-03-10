@@ -1,6 +1,7 @@
 package spittr.dbproxy.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -8,15 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spittr.data.ReferenceDao;
+import spittr.data.model.ReferenceEntity;
 import spittr.dbproxy.assembler.ReferenceResourceAssembler;
 import spittr.dbproxy.hateos.resource.ReferenceResource;
-import spittr.data.model.ReferenceEntity;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/data/references",
         produces = "application/json")
@@ -38,6 +40,7 @@ public class DataReferenceController {
         } else {
             page = PageRequest.of(0, 5);
         }
+        log.info("Getting references, page=[{}]", page);
         List<ReferenceEntity> entitiesList = StreamSupport.stream(referenceDao.findAll(page).spliterator(), false)
                 .collect(Collectors.toList());
 
@@ -52,6 +55,7 @@ public class DataReferenceController {
 
     @GetMapping("{id}")
     public ResponseEntity<ReferenceResource> getReference(@PathVariable Long id) {
+        log.info("Getting reference by id [{}]", id);
         Optional<ReferenceEntity> referenceEntity = referenceDao.findById(id);
 
         if (referenceEntity.isPresent()) {
