@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  db-proxy:
+    image: spittr/db-proxy:latest
+    ports:
+      - "8081:8080"
