@@ -28,6 +28,7 @@
       <module>spittr-domain</module>
       <module>spittr-security</module>
       <module>spittr-web</module>
+      <module>spittr-spotify</module>
     </modules>
 
 </project>
