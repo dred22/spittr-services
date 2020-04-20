@@ -1,22 +1,26 @@
 package spittr.web.service.impl;
 
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.client.Traverson;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import spittr.domain.model.Reference;
 import spittr.web.service.ReferenceService;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ReferenceServiceImpl implements ReferenceService {
 
-    private Traverson traverson;
+    private RestTemplate restClient;
+    private String referenceUrl;
 
-    public ReferenceServiceImpl(Traverson traverson) {
-        this.traverson = traverson;
-
+    public ReferenceServiceImpl(RestTemplate restClient, @Value("${spittr.reference-url}") String referenceUrl) {
+        this.restClient = restClient;
+        this.referenceUrl = referenceUrl;
     }
 
     @Override
@@ -25,21 +29,23 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public Reference findByUsername(String reference) {
+    public Reference findByUsername(String userName) {
         //TODO ti finish
-        ParameterizedTypeReference<Resource<Reference>> referenceType =
+/*        ParameterizedTypeReference<Resource<Reference>> referenceType =
                 new ParameterizedTypeReference<>() {
-                };
+                };*/
 
-        Reference references = traverson.follow("References").toObject(referenceType)
-                .getContent();
+        Reference reference = restClient.getForObject(referenceUrl + "/{name}", Reference.class, userName);
 
-        return references;
+        return reference;
     }
 
     @Override
     public List<Reference> findReferences(long max, int count) {
-        return null;
+        Reference[] referencesArray = restClient.getForObject(referenceUrl, Reference[].class);
+        List<Reference> references = referencesArray != null ? Arrays.asList(referencesArray) : Collections.emptyList();
+        log.info("Got references [{}]", references.size());
+        return references;
     }
 
     @Override
