@@ -1,0 +1,1 @@
+Project contains domain data models without any heavy dependencies
