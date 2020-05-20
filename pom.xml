@@ -29,6 +29,7 @@
       <module>spittr-security</module>
       <module>spittr-web</module>
       <module>spittr-spotify</module>
+      <module>spittr-config-server</module>
     </modules>
 
 </project>
