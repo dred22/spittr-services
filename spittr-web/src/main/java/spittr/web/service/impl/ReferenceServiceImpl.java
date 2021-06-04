@@ -2,6 +2,7 @@ package spittr.web.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import spittr.domain.model.Reference;
@@ -25,6 +26,8 @@ public class ReferenceServiceImpl implements ReferenceService {
 
     @Override
     public Reference save(Reference reference) {
+        ResponseEntity<Reference> referenceResponseEntity = restClient.postForEntity(referenceUrl, reference, Reference.class);
+
         return null;
     }
 
@@ -36,6 +39,13 @@ public class ReferenceServiceImpl implements ReferenceService {
                 };*/
 
         Reference reference = restClient.getForObject(referenceUrl + "/{name}", Reference.class, userName);
+
+        return reference;
+    }
+
+    @Override
+    public Reference findById(Long id) {
+        Reference reference = restClient.getForObject(referenceUrl + "/{id}", Reference.class, id);
 
         return reference;
     }

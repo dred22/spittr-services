@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spittr.data.ReferenceDao;
 import spittr.data.model.ReferenceEntity;
-import spittr.dbproxy.util.converter.ReferenceConverter;
+import spittr.dbproxy.util.mapper.ReferenceMapper;
 import spittr.domain.model.Reference;
 
 import java.util.List;
@@ -24,8 +24,11 @@ public class DataReferenceController {
 
     private ReferenceDao referenceDao;
 
-    public DataReferenceController(ReferenceDao referenceDao) {
+    private ReferenceMapper referenceMapper;
+
+    public DataReferenceController(ReferenceDao referenceDao, ReferenceMapper referenceMapper) {
         this.referenceDao = referenceDao;
+        this.referenceMapper = referenceMapper;
     }
 
     @GetMapping
@@ -38,7 +41,7 @@ public class DataReferenceController {
         }
         log.info("Getting references, page=[{}]", page);
         List<Reference> references = StreamSupport.stream(referenceDao.findAll(page).spliterator(), false)
-                .map(ReferenceConverter::entityToDomain)
+                .map(referenceMapper::referenceEntityToReference)
                 .collect(Collectors.toList());
 
         return references;
@@ -50,8 +53,19 @@ public class DataReferenceController {
         Optional<ReferenceEntity> referenceEntity = referenceDao.findById(id);
 
         if (referenceEntity.isPresent()) {
-            return new ResponseEntity<>(ReferenceConverter.entityToDomain(referenceEntity.get()), HttpStatus.OK);
+            return new ResponseEntity<>(referenceMapper.referenceEntityToReference(referenceEntity.get()), HttpStatus.OK);
         }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+    @PostMapping()
+    public ResponseEntity<Reference> save(@RequestBody Reference reference) {
+        log.info("Getting reference [{}]", reference);
+        referenceDao.save(referenceMapper.referenceToReferenceEntity(reference));
+/*        Optional<ReferenceEntity> referenceEntity = referenceDao.findById(id);
+
+        if (referenceEntity.isPresent()) {
+            return new ResponseEntity<>(ReferenceConverter.entityToDomain(referenceEntity.get()), HttpStatus.OK);
+        }*/
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }

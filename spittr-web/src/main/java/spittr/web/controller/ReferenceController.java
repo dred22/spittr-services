@@ -36,7 +36,7 @@ public class ReferenceController {
     @GetMapping(value = "/delete/{id}")
     public String deleteReference(@PathVariable Long id) {
         referenceService.deleteById(id);
-        return "redirect:/references";
+        return "redirect:/list";
     }
 
     @PostMapping(value = "/register")
@@ -45,14 +45,13 @@ public class ReferenceController {
             return "registerForm";
         }
         Reference savedReference = referenceService.save(reference);
-        redirectAttributes.addAttribute("username", reference.getUserName());
-        return "redirect:/reference/{username}";
+        redirectAttributes.addAttribute("id", reference.getId());
+        return "redirect:/reference/{id}";
     }
 
-    @GetMapping
-    public String showReference(
-            @PathVariable String username, Model model) {
-        Reference reference = referenceService.findByUsername(username);
+    @GetMapping("/{id}")
+    public String showReference(@PathVariable Long id, Model model) {
+        Reference reference = referenceService.findById(id);
         if (reference == null) {
             throw new ReferenceNotFoundException();
         }
@@ -60,8 +59,8 @@ public class ReferenceController {
         return "reference";
     }
 
-    @GetMapping(value = "/references")
-    public List<Reference> getReferences(Model model,
+    @GetMapping(value = "/list")
+    public String getReferences(Model model,
                                          @RequestParam(value = "max", defaultValue = "9223372036854775807") long max,
                                          @RequestParam(value = "count", defaultValue = "20") int count) {
         log.debug("getting all references");
@@ -69,9 +68,8 @@ public class ReferenceController {
         if (CollectionUtils.isEmpty(references)) {
             throw new ReferenceNotFoundException();
         }
-        //when instead of view name a value is returned, Spring looks for a view with the same name,
-        // and if it's a case the model data value name will be composed of his type(s), in this case, it'll be 'referenceList'
-        return references;
+        model.addAttribute("references", references);
+        return "list";
     }
 
 }

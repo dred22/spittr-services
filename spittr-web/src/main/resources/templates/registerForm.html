@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head th:replace="component/head :: copy"></head>
+
+<body>
+<div th:replace="component/lang-bar :: copy"></div>
+<div id="wrapper">
+	<!--     <div id="wrapper"> -->
+	<div th:replace="component/side-bar :: #sidebar-wrapper"></div>
+
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<h1>Register</h1>
+				<h2>Hello <span sec:authentication="name">Hasn't logged in</span>!</h2>
+				<form th:object="${reference}" th:action="@{/reference/register/}" method="post">
+
+					<label th:text="#{firstName}">firstName</label>
+					<input type="text" class="form-control" th:field="*{firstName}" th:errorclass="has-error"/>
+					<span class="help-block" th:if="${#fields.hasErrors('firstName')}">
+						<ul>
+							<li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"/>
+						</ul>
+					</span>
+
+					<label th:text="#{lastName}">lastName</label>
+					<input type="text" class="form-control" th:field="*{lastName}" th:errorclass="has-error"/>
+					<span class="help-block" th:if="${#fields.hasErrors('lastName')}">
+						<ul>
+							<li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"/>
+						</ul>
+					</span>
+
+					<label th:text="#{userName}">userName</label>
+					<input type="text" class="form-control" th:field="*{userName}" th:errorclass="has-error"/>
+					<span class="help-block" th:if="${#fields.hasErrors('userName')}">
+						<ul>
+							<li th:each="err : ${#fields.errors('userName')}" th:text="${err}"/>
+						</ul>
+					</span>
+
+					<label th:text="#{password}">password</label>
+					<input type="text" class="form-control" th:field="*{password}" th:errorclass="has-error"/>
+					<span class="help-block" th:if="${#fields.hasErrors('password')}">
+						<ul>
+							<li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+						</ul>
+					</span>
+
+					<label th:text="#{email}">email</label>
+					<input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
+					<span class="help-block" th:if="${#fields.hasErrors('email')}">
+						<ul>
+							<li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+						</ul>
+					</span>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+<div th:replace="component/script-block :: #scripts-template"></div>
+</body>
+</html>

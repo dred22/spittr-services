@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head th:replace="component/head :: copy"></head>
+
+<body>
+<div th:replace="component/lang-bar :: copy"></div>
+<div id="wrapper">
+	<!--     <div id="wrapper"> -->
+	<div th:replace="component/side-bar :: #sidebar-wrapper"></div>
+
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<h1>Your Profile</h1>
+				<div th:text="#{reference.userName}">username : </div>
+				<div th:text="#{reference.firstName}">firstName :</div>
+				<div th:text="#{reference.lastName}">lastName :</div>
+				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+<div th:replace="component/script-block :: #scripts-template"></div>
+</body>
+</html>

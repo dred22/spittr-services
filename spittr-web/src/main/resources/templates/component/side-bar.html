@@ -7,7 +7,7 @@
     <ul class="sidebar-nav">
         <li class="sidebar-brand"><a th:href="@{/}"> CRUD </a></li>
         <li><a th:href="@{/reference/register}" th:text="#{side-bar.create}"></a></li>
-        <li><a th:href="@{/reference/references}" th:text="#{side-bar.show_all}"></a></li>
+        <li><a th:href="@{/reference/list}" th:text="#{side-bar.show_all}"></a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{authentication.logout}" ></a></li>
         <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" th:text="#{authentication.login}" ></a></li>
 

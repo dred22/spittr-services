@@ -10,6 +10,8 @@ public interface ReferenceService {
 
     Reference findByUsername(String reference);
 
+    Reference findById(Long id);
+
     List<Reference> findReferences(long max, int count);
 
     void deleteById(long i);
