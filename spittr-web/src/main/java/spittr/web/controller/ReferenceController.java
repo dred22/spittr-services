@@ -36,7 +36,7 @@ public class ReferenceController {
     @GetMapping(value = "/delete/{id}")
     public String deleteReference(@PathVariable Long id) {
         referenceService.deleteById(id);
-        return "redirect:/list";
+        return "redirect:/reference/list";
     }
 
     @PostMapping(value = "/register")
@@ -45,7 +45,7 @@ public class ReferenceController {
             return "registerForm";
         }
         Reference savedReference = referenceService.save(reference);
-        redirectAttributes.addAttribute("id", reference.getId());
+        redirectAttributes.addAttribute("id", savedReference.getId());
         return "redirect:/reference/{id}";
     }
 

@@ -18,8 +18,7 @@ import java.util.stream.StreamSupport;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/data/references",
-        produces = "application/json")
+@RequestMapping(path = "/data/references", produces = "application/json")
 public class DataReferenceController {
 
     private ReferenceDao referenceDao;
@@ -35,9 +34,9 @@ public class DataReferenceController {
     public List<Reference> getReferences(@RequestParam("page") Optional<Integer> pageNumber) {
         PageRequest page;
         if (pageNumber.isPresent()) {
-            page = PageRequest.of(pageNumber.get(), 5);
+            page = PageRequest.of(pageNumber.get(), 10);
         } else {
-            page = PageRequest.of(0, 5);
+            page = PageRequest.of(0, 10);
         }
         log.info("Getting references, page=[{}]", page);
         List<Reference> references = StreamSupport.stream(referenceDao.findAll(page).spliterator(), false)
@@ -57,15 +56,18 @@ public class DataReferenceController {
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        log.info("Deleting reference by id [{}]", id);
+        referenceDao.deleteById(id);
+    }
+
     @PostMapping()
     public ResponseEntity<Reference> save(@RequestBody Reference reference) {
         log.info("Getting reference [{}]", reference);
-        referenceDao.save(referenceMapper.referenceToReferenceEntity(reference));
-/*        Optional<ReferenceEntity> referenceEntity = referenceDao.findById(id);
-
-        if (referenceEntity.isPresent()) {
-            return new ResponseEntity<>(ReferenceConverter.entityToDomain(referenceEntity.get()), HttpStatus.OK);
-        }*/
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        ReferenceEntity saved = referenceDao.save(referenceMapper.referenceToReferenceEntity(reference));
+        return new ResponseEntity<>(referenceMapper.referenceEntityToReference(saved), HttpStatus.OK);
     }
 }

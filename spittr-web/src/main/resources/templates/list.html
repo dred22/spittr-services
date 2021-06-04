@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+>
 <head th:replace="component/head :: copy"></head>
 
 <body>
@@ -30,6 +30,9 @@
 							<td th:text="${reference.lastName}">lastname</td>
 							<td th:text="${reference.userName}">username</td>
 							<td th:text="${reference.password}">password</td>
+							<td>
+								<a th:href="@{/reference/delete/{id}(id=${reference.id})}" class="btn btn-danger" role="button"  th:text="#{show-all.reference.table.action.delete}">bbb</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

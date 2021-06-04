@@ -28,7 +28,7 @@ public class ReferenceServiceImpl implements ReferenceService {
     public Reference save(Reference reference) {
         ResponseEntity<Reference> referenceResponseEntity = restClient.postForEntity(referenceUrl, reference, Reference.class);
 
-        return null;
+        return referenceResponseEntity.getBody();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public void deleteById(long i) {
-
+    public void deleteById(long id) {
+        restClient.delete(referenceUrl+ "/{id}", id, Long.class);
     }
 }
