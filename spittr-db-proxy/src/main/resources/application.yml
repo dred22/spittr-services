@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   jpa:
     show-sql: true
@@ -7,6 +9,9 @@ spring:
   profiles:
     active:
       - inmemory
+  artemis:
+    user: artemis
+    password: simetraehcapa
 ---
 spring:
   jpa:

@@ -4,7 +4,6 @@ package spittr.data.model;
 import lombok.Data;
 import spittr.data.converter.LocalDateAttributeConverter;
 
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -39,5 +38,8 @@ public class ReferenceEntity {
 
     @Column(name="DELETED")
     private boolean isDeleted;
+
+    @Column(name="RANDOM")
+    private Integer random;
 
 }

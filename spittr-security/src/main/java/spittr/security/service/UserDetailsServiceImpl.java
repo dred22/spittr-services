@@ -1,9 +1,8 @@
 package spittr.security.service;
 
 
-
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,14 +20,20 @@ import java.util.Arrays;
 public class UserDetailsServiceImpl
         implements UserDetailsService {
 
-   @Autowired
-   RestTemplate restTemplate;
+   private final RestTemplate restTemplate;
+   private final String dataBaseUsr;
+
+    public UserDetailsServiceImpl(RestTemplate restTemplate,
+                                  @Value("${api.database.url:http://localhost:8081/data/users}") String dataBaseUsr) {
+        this.restTemplate = restTemplate;
+        this.dataBaseUsr = dataBaseUsr;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName)
             throws UsernameNotFoundException {
 
-        SystemUser systemUser = restTemplate.getForObject("http://localhost:8080/data/users/{userName}", SystemUser.class, userName);
+        SystemUser systemUser = restTemplate.getForObject(dataBaseUsr + "/{userName}", SystemUser.class, userName);
         log.info("Security got system user [{}]",systemUser);
         GrantedAuthority authority = new SimpleGrantedAuthority(systemUser.getAuthority());
         UserDetails userDetails = new User(systemUser.getUserName(),

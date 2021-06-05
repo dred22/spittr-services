@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spittr.data.ReferenceDao;
+import spittr.data.ReferenceRepository;
 import spittr.data.model.ReferenceEntity;
 import spittr.dbproxy.util.mapper.ReferenceMapper;
 import spittr.domain.model.Reference;
@@ -21,12 +21,12 @@ import java.util.stream.StreamSupport;
 @RequestMapping(path = "/data/references", produces = "application/json")
 public class DataReferenceController {
 
-    private ReferenceDao referenceDao;
+    private ReferenceRepository referenceRepository;
 
     private ReferenceMapper referenceMapper;
 
-    public DataReferenceController(ReferenceDao referenceDao, ReferenceMapper referenceMapper) {
-        this.referenceDao = referenceDao;
+    public DataReferenceController(ReferenceRepository referenceRepository, ReferenceMapper referenceMapper) {
+        this.referenceRepository = referenceRepository;
         this.referenceMapper = referenceMapper;
     }
 
@@ -39,7 +39,7 @@ public class DataReferenceController {
             page = PageRequest.of(0, 10);
         }
         log.info("Getting references, page=[{}]", page);
-        List<Reference> references = StreamSupport.stream(referenceDao.findAll(page).spliterator(), false)
+        List<Reference> references = StreamSupport.stream(referenceRepository.findAll(page).spliterator(), false)
                 .map(referenceMapper::referenceEntityToReference)
                 .collect(Collectors.toList());
 
@@ -49,7 +49,7 @@ public class DataReferenceController {
     @GetMapping("{id}")
     public ResponseEntity<Reference> getReference(@PathVariable Long id) {
         log.info("Getting reference by id [{}]", id);
-        Optional<ReferenceEntity> referenceEntity = referenceDao.findById(id);
+        Optional<ReferenceEntity> referenceEntity = referenceRepository.findById(id);
 
         if (referenceEntity.isPresent()) {
             return new ResponseEntity<>(referenceMapper.referenceEntityToReference(referenceEntity.get()), HttpStatus.OK);
@@ -61,13 +61,20 @@ public class DataReferenceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         log.info("Deleting reference by id [{}]", id);
-        referenceDao.deleteById(id);
+        referenceRepository.deleteById(id);
     }
 
     @PostMapping()
     public ResponseEntity<Reference> save(@RequestBody Reference reference) {
         log.info("Getting reference [{}]", reference);
-        ReferenceEntity saved = referenceDao.save(referenceMapper.referenceToReferenceEntity(reference));
-        return new ResponseEntity<>(referenceMapper.referenceEntityToReference(saved), HttpStatus.OK);
+        ReferenceEntity saved = referenceRepository.save(referenceMapper.referenceToReferenceEntity(reference));
+        return new ResponseEntity<>(referenceMapper.referenceEntityToReference(saved), HttpStatus.CREATED);
+    }
+
+    @PutMapping()
+    public ResponseEntity<Reference> update(@RequestBody Reference reference) {
+        log.info("Getting reference [{}]", reference);
+        ReferenceEntity saved = referenceRepository.save(referenceMapper.referenceToReferenceEntity(reference));
+        return new ResponseEntity<>(referenceMapper.referenceEntityToReference(saved), HttpStatus.NO_CONTENT);
     }
 }

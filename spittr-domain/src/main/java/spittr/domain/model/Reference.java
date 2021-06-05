@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -32,5 +33,7 @@ public class Reference {
     private String email;
 
     private LocalDate ts;
+    @Null
+    private Integer random;
 
 }

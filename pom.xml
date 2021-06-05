@@ -31,6 +31,15 @@
       <module>spittr-web</module>
       <module>spittr-spotify</module>
       <module>spittr-config-server</module>
+      <module>spittr-dummy-service</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>

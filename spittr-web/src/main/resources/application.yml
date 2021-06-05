@@ -5,6 +5,9 @@ logging:
   level:
     spittr: DEBUG
 spring:
+  artemis:
+    user: artemis
+    password: simetraehcapa
   application.name: Bootstrap Spring Boot
   thymeleaf:
     cache: false
@@ -12,4 +15,4 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 spittr:
-  reference-url: http://127.0.0.1:8080/data/references
+  reference-url: http://127.0.0.1:8081/data/references

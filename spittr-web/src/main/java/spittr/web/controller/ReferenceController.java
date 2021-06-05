@@ -1,7 +1,6 @@
 package spittr.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spittr.domain.model.Reference;
 import spittr.web.exeption.ReferenceNotFoundException;
 import spittr.web.service.ReferenceService;
+import spittr.web.service.impl.MessageSender;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,10 +21,11 @@ import java.util.List;
 public class ReferenceController {
 
     private ReferenceService referenceService;
+    private MessageSender messageSender;
 
-    @Autowired
-    ReferenceController(ReferenceService referenceService) {
+    public ReferenceController(ReferenceService referenceService, MessageSender messageSender) {
         this.referenceService = referenceService;
+        this.messageSender = messageSender;
     }
 
     @GetMapping(value = "/register")
@@ -45,6 +46,7 @@ public class ReferenceController {
             return "registerForm";
         }
         Reference savedReference = referenceService.save(reference);
+        messageSender.sendNewReference(savedReference);
         redirectAttributes.addAttribute("id", savedReference.getId());
         return "redirect:/reference/{id}";
     }

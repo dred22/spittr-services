@@ -22,6 +22,7 @@ CREATE TABLE reference
      ts        DATE,
      username  VARCHAR(255),
      deleted   BOOLEAN DEFAULT FALSE,
+     random    INT,
      PRIMARY KEY (id)
   ) ;
 COMMIT;
